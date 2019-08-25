@@ -1,0 +1,2 @@
+SELECT * FROM "EXPEDIENTES"
+delete from "EXPEDIENTES"
