@@ -5,17 +5,13 @@ import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -75,10 +71,8 @@ public class Consulta implements Serializable{
 	
 	@JoinColumn(name = "\"ID_RECETA\"")
 	@OneToOne(cascade = CascadeType.DETACH)
-	
 	private Receta receta;
-//	@Column(name = "\"ID_RECETA\"")
-//	private Receta idRecenta;
+
 	
 	@Column(name = "\"PAD_ACTUAL\"")
 	private String pad_actual;

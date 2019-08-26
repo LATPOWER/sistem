@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,17 +21,6 @@ public class FamiliarPK implements Serializable {
 	 */
 	private static final long serialVersionUID = -982695936192791278L;
 	
-	public FamiliarPK() {
-		super();
-	}
-	
-
-	public FamiliarPK(Long idFamiliar, Expedientes expediente) {
-		super();
-		this.idFamiliar = idFamiliar;
-		this.expediente = expediente;
-	}
-
 	@Id
 	@GeneratedValue(generator = "expedientes_familiar")
     @GenericGenerator(
@@ -53,7 +41,11 @@ public class FamiliarPK implements Serializable {
 	@JoinColumn(name = "\"IDEXPEDIENTE\"")
 	@ManyToOne(cascade = CascadeType.DETACH)
  	private Expedientes expediente;
-
+	
+	public FamiliarPK() {
+		super();
+	}
+	
 	public Long getIdFamiliar() {
 		return idFamiliar;
 	}

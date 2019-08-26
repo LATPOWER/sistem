@@ -1,10 +1,7 @@
 package mx.com.simojica;
 
-import java.sql.Date;
-import java.time.Instant;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,51 +14,36 @@ import org.springframework.web.WebApplicationInitializer;
 import mx.com.simojica.aspects.ExpedientesPerformanceMonitorAdvisor;
 import mx.com.simojica.aspects.ExpedientesPerformanceMonitorInterceptor;
 import mx.com.simojica.aspects.ExpedientesServiceAspect;
-import mx.com.simojica.persistence.entity.Expedientes;
-import mx.com.simojica.persistence.repository.ExpedientesRepository;
 
 @EnableAutoConfiguration
 @SpringBootApplication
 @EnableAspectJAutoProxy
 public class ServletInitializer extends SpringBootServletInitializer implements WebApplicationInitializer {
 
-	
+	private static final Logger LOGGER = LogManager.getLogger(ServletInitializer.class);
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		System.out.println("XXXXXXXXXXXXYYYYYYYAAAAAAAA");
+		LOGGER.debug("INIZIALIZANDO SPRING BOOT");
 		return application.sources(ServletInitializer.class);
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("EN MAIN");
+		LOGGER.debug("EN MAIN");
 		SpringApplication.run(ServletInitializer.class, args);
 	}
 	
-//	@Bean
-//	CommandLineRunner runner() {
-//		return args -> {
-//			
-//			System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXX INSERTANDO XXXXXXXXXXXXXXXXXXXXX");
-//			repository.save(new Expedientes(1l, "A","B","C", null,	null, "123", "10", null));
-//			
-//		};
-//	}	
-
 	@Bean
-	public ExpedientesServiceAspect expedientesServiceAspect(){
-		return new ExpedientesServiceAspect();
+	public ExpedientesPerformanceMonitorAdvisor expedientesPerformanceMonitorAdvisor() {
+		return new ExpedientesPerformanceMonitorAdvisor(expedientesPerformanceMonitorInterceptor());
 	}
 	
-	
 	@Bean
-	public ExpedientesPerformanceMonitorInterceptor performanceMonitorInterceptor() {
+	public ExpedientesPerformanceMonitorInterceptor expedientesPerformanceMonitorInterceptor() {
 		return new ExpedientesPerformanceMonitorInterceptor(true);
 	}
 	
-	
-
 	@Bean
-	public ExpedientesPerformanceMonitorAdvisor performanceMonitorAdvisor() {
-		return new ExpedientesPerformanceMonitorAdvisor(performanceMonitorInterceptor());
-	}
+	public ExpedientesServiceAspect expedientesServiceAspect(){
+		return new ExpedientesServiceAspect();
+	}	
 }

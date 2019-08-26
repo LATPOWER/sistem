@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,17 +20,6 @@ public class ConsultaPK implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -3872979156854556582L;
-	
-	public ConsultaPK() {
-		super();
-	}
-	
-	public ConsultaPK(Long idConsulta, Expedientes expediente) {
-		super();
-		this.idConsulta = idConsulta;
-		this.expediente = expediente;
-	}
-	
 	
 	@Id
 	@GeneratedValue(generator = "expedientes_consulta")
@@ -53,8 +41,11 @@ public class ConsultaPK implements Serializable{
  	@JoinColumn(name = "\"IDEXPEDIENTE\"")
  	@ManyToOne(cascade = CascadeType.DETACH)
 	private Expedientes expediente;
- 	
- 	
+	
+	public ConsultaPK() {
+		super();
+	}
+	
 	public Long getIdConsulta() {
 		return idConsulta;
 	}
@@ -67,6 +58,7 @@ public class ConsultaPK implements Serializable{
 	public void setExpediente(Expedientes expediente) {
 		this.expediente = expediente;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,6 +67,7 @@ public class ConsultaPK implements Serializable{
 		result = prime * result + (int) (idConsulta ^ (idConsulta >>> 32));
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -93,14 +86,5 @@ public class ConsultaPK implements Serializable{
 			return false;
 		return true;
 	}
- 	
- 	
-	
- 	
-	
-	
- 	
- 	
- 	
-
+ 
 }

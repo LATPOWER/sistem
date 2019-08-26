@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,17 +22,6 @@ public class HistoriaClinicaPK implements Serializable{
 	private static final long serialVersionUID = 4150154408298191794L;
 	
 	
-	public HistoriaClinicaPK() {
-		super();
-	}
-	
-
-	public HistoriaClinicaPK(Long idHistoriaClinica, Expedientes expediente) {
-		super();
-		this.idHistoriaClinica = idHistoriaClinica;
-		this.expediente = expediente;
-	}
-
 	@Id
 	@GeneratedValue(generator = "expedientes_hist_clinica")
     @GenericGenerator(
@@ -54,6 +42,10 @@ public class HistoriaClinicaPK implements Serializable{
 	@JoinColumn(name = "\"IDEXPEDIENTE\"")
 	@ManyToOne(cascade = CascadeType.DETACH)
  	private Expedientes expediente;
+	
+	public HistoriaClinicaPK() {
+		super();
+	}
 
 
 	public Long getIdHistoriaClinica() {
@@ -70,7 +62,6 @@ public class HistoriaClinicaPK implements Serializable{
 		return expediente;
 	}
 
-
 	public void setExpediente(Expedientes expediente) {
 		this.expediente = expediente;
 	}
@@ -84,7 +75,6 @@ public class HistoriaClinicaPK implements Serializable{
 		result = prime * result + ((idHistoriaClinica == null) ? 0 : idHistoriaClinica.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -106,7 +96,6 @@ public class HistoriaClinicaPK implements Serializable{
 		} else if (!idHistoriaClinica.equals(other.idHistoriaClinica))
 			return false;
 		return true;
-	}
-	
+	}	
 
 }

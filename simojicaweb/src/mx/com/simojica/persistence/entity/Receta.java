@@ -3,16 +3,10 @@ package mx.com.simojica.persistence.entity;
 import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -27,26 +21,6 @@ public class Receta implements Serializable{
 	
 	private static final long serialVersionUID = -5930059836997886210L;
 	
-	public Receta() {
-		super();
-	}
-	
-	public Receta( String aPaterno, String aMaterno, String nombre, String pesoActual,
-			String tallaActual, String temperatura, String edad, String direccion, Date fecha, String rp) {
-		super();
-	//	this.consulta = consulta;
-		this.aPaterno = aPaterno;
-		this.aMaterno = aMaterno;
-		this.nombre = nombre;
-		this.pesoActual = pesoActual;
-		this.tallaActual = tallaActual;
-		this.temperatura = temperatura;
-		this.edad = edad;
-		this.direccion = direccion;
-		this.fecha = fecha;
-		this.rp = rp;
-	}
-
 	@Id
 	@GeneratedValue(generator = "expedientes_receta")
     @GenericGenerator(
@@ -63,11 +37,6 @@ public class Receta implements Serializable{
 	
 	@Column(name = "\"ID_RECETA\"")
 	private Long idReceta;
-	
-//	@Id
-//	@JoinColumn(name = "\"ID_CONSULTA\"")
-//	@OneToOne(cascade = CascadeType.DETACH)
-// 	private Consulta consulta;
 	
 	@Column(name = "\"A_PATERNO\"")
 	private String aPaterno;
@@ -98,6 +67,10 @@ public class Receta implements Serializable{
 	
 	@Column(name = "\"RP\"")
 	private String rp;
+	
+	public Receta() {
+		super();
+	}
 
 	public Long getIdReceta() {
 		return idReceta;
@@ -106,8 +79,6 @@ public class Receta implements Serializable{
 	public void setIdReceta(Long idReceta) {
 		this.idReceta = idReceta;
 	}
-
-
 
 	public String getaPaterno() {
 		return aPaterno;
@@ -232,10 +203,4 @@ public class Receta implements Serializable{
 		return true;
 	}
 	
-	
-	
-	
-	
- 
-
 }

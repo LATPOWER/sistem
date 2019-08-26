@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -25,22 +24,6 @@ public class Familiar implements Serializable{
 	 */
 	private static final long serialVersionUID = 8648234541292037238L;
 	
-	public Familiar() {
-		super();
-	}
-	
-	public Familiar(Expedientes expediente, String apellidoPaterno, String apellidoMaterno, String nombre, String edad,
-			String ocupacion, byte[] foto) {
-		super();
-		this.expediente = expediente;
-		this.apellidoPaterno = apellidoPaterno;
-		this.apellidoMaterno = apellidoMaterno;
-		this.nombre = nombre;
-		this.edad = edad;
-		this.ocupacion = ocupacion;
-		this.foto = foto;
-	}
-
 	@Id
 	@GeneratedValue(generator = "expedientes_familiar")
     @GenericGenerator(
@@ -79,6 +62,11 @@ public class Familiar implements Serializable{
 	
 	@Column(name = "\"FOT_M\"")
 	private byte[] foto;
+	
+	public Familiar() {
+		super();
+	}
+	
 
 	public Long getIdFamiliar() {
 		return idFamiliar;
@@ -186,7 +174,4 @@ public class Familiar implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-
 }

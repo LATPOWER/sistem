@@ -6,14 +6,10 @@ import java.sql.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,37 +19,12 @@ import org.hibernate.annotations.Parameter;
 @Entity
 @Table(name = "\"EXPEDIENTES\"")
 public class Expedientes implements Serializable{
-	
-	
+		
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8924442470478910765L;
 	
-	
-	public Expedientes() {
-		super();
-	}
-	
-	public Expedientes( String apellidoPaterno, String apellidoMaterno, String nombre,
-			Date fechaActual, Date fechaNacimiento, String telefono, String edad, byte[] fot,Long idDireccion,
-			Long idHistoriaClinica,Long idFamiliar1,Long idFamiliar2) {
-		super();
-		//this.idExpediente = idExpediente;
-		this.apellidoPaterno = apellidoPaterno;
-		this.apellidoMaterno = apellidoMaterno;
-		this.nombre = nombre;
-		this.fechaActual = fechaActual;
-		this.fechaNacimiento = fechaNacimiento;
-		this.telefono = telefono;
-		this.edad = edad;
-		this.fot = fot;
-		this.idDirecion = idDireccion;
-		this.idHistoriaClinica =idHistoriaClinica;
-		this.idFamiliar1 = idFamiliar1;
-		this.idFamiliar2 = idFamiliar2;
-	}
-	//,strategy =  GenerationType.IDENTITY
 	@Id
 	@GeneratedValue(generator = "expedientes_sequence")
     @GenericGenerator(
@@ -99,12 +70,12 @@ public class Expedientes implements Serializable{
 	
 	@Column(name = "\"ID_FAMILIAR2\"")
 	private Long idFamiliar2;
+	
 	@JoinColumns
 	 ({
 		  @JoinColumn(name = "\"ID_DIRECCION\"", insertable = false, updatable = false),
 		  @JoinColumn(name = "\"IDEXPEDIENTE\"", insertable = false, updatable = false)
 		})
-	//@JoinColumn(name ="\"ID_DIRECCION\"" )
 	@OneToOne(cascade = CascadeType.REFRESH)
 	private Direccion direccion;
 	
@@ -113,7 +84,7 @@ public class Expedientes implements Serializable{
 	  @JoinColumn(name = "\"ID_HISTO_CLINICA\"", insertable = false, updatable = false),
 	  @JoinColumn(name = "\"IDEXPEDIENTE\"", insertable = false, updatable = false)
 	})
-	//@JoinColumn(name ="\"ID_HISTO_CLINICA\"" )
+
 	@OneToOne(cascade = CascadeType.MERGE)
 	private HistoriaClinica historiaClinica;
 	@JoinColumns
@@ -121,20 +92,23 @@ public class Expedientes implements Serializable{
 	  @JoinColumn(name ="\"ID_FAMILIAR1\"" , insertable = false, updatable = false),
 	  @JoinColumn(name ="\"IDEXPEDIENTE\"", insertable = false, updatable = false)
 	})		
-	//@JoinColumn(name ="\"ID_FAMILIAR\"" ,referencedColumnName = "\"ID_FAMILIAR1\"")
+	
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Familiar familiar1;
-//	
 	@JoinColumns
 	({
 	  @JoinColumn(name ="\"ID_FAMILIAR2\"", insertable = false, updatable = false),
 	  @JoinColumn(name = "\"IDEXPEDIENTE\"", insertable = false, updatable = false)
 	})	
-	//@JoinColumn(name ="\"ID_FAMILIAR\"",referencedColumnName = "\"ID_FAMILIAR2\"" )
+
 	@OneToOne(cascade = CascadeType.MERGE)
 	private Familiar familiar2;
-
-
+	
+	
+	public Expedientes() {
+		super();
+	}
+	
 
 	public Long getIdExpediente() {
 		return idExpediente;
@@ -189,9 +163,6 @@ public class Expedientes implements Serializable{
 		this.fot = fot;
 	}
 
-	
-
-
 	public Long getIdDirecion() {
 		return idDirecion;
 	}
@@ -199,7 +170,6 @@ public class Expedientes implements Serializable{
 	public void setIdDirecion(Long idDirecion) {
 		this.idDirecion = idDirecion;
 	}
-	
 
 	public Long getIdHistoriaClinica() {
 		return idHistoriaClinica;
@@ -273,8 +243,6 @@ public class Expedientes implements Serializable{
 	}
 
 
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -306,11 +274,6 @@ public class Expedientes implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
 	
 	
 

@@ -6,10 +6,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -23,16 +21,6 @@ public class DireccionPK implements Serializable{
 	 */
 	private static final long serialVersionUID = 840010452740268129L;
 	
-	public DireccionPK() {
-		super();
-	}
-	
-	public DireccionPK(Long idDireccion, Expedientes expediente) {
-		super();
-		this.idDireccion = idDireccion;
-		this.expediente = expediente;
-	}
-
 	@Id
 	@GeneratedValue(generator = "expedientes_direccion")
     @GenericGenerator(
@@ -55,6 +43,13 @@ public class DireccionPK implements Serializable{
 	@OneToOne(cascade = CascadeType.DETACH)
  	private Expedientes expediente;
 
+	
+	
+	public DireccionPK() {
+		super();
+	}
+	
+	
 	public Long getIdDireccion() {
 		return idDireccion;
 	}
@@ -100,7 +95,6 @@ public class DireccionPK implements Serializable{
 		} else if (!idDireccion.equals(other.idDireccion))
 			return false;
 		return true;
-	}
-	
+	}	
 	
 }

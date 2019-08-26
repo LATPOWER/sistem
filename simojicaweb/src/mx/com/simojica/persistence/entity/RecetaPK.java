@@ -8,7 +8,6 @@ import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -24,16 +23,6 @@ public class RecetaPK implements Serializable {
 	private static final long serialVersionUID = -3873304180521182371L;
 	
 	
-	public RecetaPK() {
-		super();
-	}
-	
-	public RecetaPK(Long idReceta, Consulta consulta) {
-		super();
-		this.idReceta = idReceta;
-		this.consulta = consulta;
-	}
-
 	@Id
 	@GeneratedValue(generator = "expedientes_receta")
     @GenericGenerator(
@@ -54,8 +43,11 @@ public class RecetaPK implements Serializable {
 	@JoinColumn(name = "\"ID_CONSULTA\"")
 	@OneToOne(cascade = CascadeType.DETACH)
  	private Consulta consulta;
-
-
+	
+	public RecetaPK() {
+		super();
+	}
+	
 	public Long getIdReceta() {
 		return idReceta;
 	}
@@ -101,9 +93,7 @@ public class RecetaPK implements Serializable {
 		} else if (!idReceta.equals(other.idReceta))
 			return false;
 		return true;
-	}
-	
-	
+	}	
 	
 
 }

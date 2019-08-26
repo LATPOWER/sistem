@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -23,23 +22,6 @@ public class Direccion implements Serializable {
 	
 	private static final long serialVersionUID = -5118250332162675873L;
 	
-	
-	public Direccion() {
-		super();
-	}
-	
-	public Direccion(Expedientes expediente, String calleAvenida, String numero, String colonia, String ciudadEstado,
-			String manzana, String codigoPostal) {
-		super();
-		this.expediente = expediente;
-		this.calleAvenida = calleAvenida;
-		this.numero = numero;
-		this.colonia = colonia;
-		this.ciudadEstado = ciudadEstado;
-		this.manzana = manzana;
-		this.codigoPostal = codigoPostal;
-	}
-
 	@Id
 	@GeneratedValue(generator = "expedientes_direccion")
     @GenericGenerator(
@@ -79,6 +61,11 @@ public class Direccion implements Serializable {
 	
 	@Column(name = "\"CP\"")
 	private String codigoPostal;
+	
+	public Direccion() {
+		super();
+	}
+	
 
 
 	public Long getIdDireccion() {

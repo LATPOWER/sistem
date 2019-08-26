@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
@@ -24,26 +23,6 @@ public class HistoriaClinica implements Serializable {
 	 */
 	private static final long serialVersionUID = -119434291905802744L;
 	
-	public HistoriaClinica() {
-		super();
-	}
-	
-	public HistoriaClinica(Expedientes expediente, String antecedentesHeredoFamiliares, String personalesPatologicos,
-			String senoMaterno, String inmunizaciones, String descripcionPsicomotriz, String pesoNacimiento,
-			String tallNacimiento, String observaciones) {
-		super();
-		this.expediente = expediente;
-		this.antecedentesHeredoFamiliares = antecedentesHeredoFamiliares;
-		this.personalesPatologicos = personalesPatologicos;
-		this.senoMaterno = senoMaterno;
-		this.inmunizaciones = inmunizaciones;
-		this.descripcionPsicomotriz = descripcionPsicomotriz;
-		this.pesoNacimiento = pesoNacimiento;
-		this.tallNacimiento = tallNacimiento;
-		this.observaciones = observaciones;
-	}
-
-
 	@Id
 	@GeneratedValue(generator = "expedientes_hist_clinica")
     @GenericGenerator(
@@ -90,6 +69,11 @@ public class HistoriaClinica implements Serializable {
 	
 	@Column(name = "\"OBSERVACIONES\"")
 	private String observaciones;
+	
+	public HistoriaClinica() {
+		super();
+	}
+	
 
 	public Long getIdHistoriaClinica() {
 		return idHistoriaClinica;
