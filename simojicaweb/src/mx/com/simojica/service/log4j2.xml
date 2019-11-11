@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <File name="LogToFile" fileName="app.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+         <RollingFile name="FileAppender" fileName="log4j2-demo.log"     >
+    <PatternLayout>
+        <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+    </PatternLayout>
+    <Policies>
+        <SizeBasedTriggeringPolicy size="10MB" />
+    </Policies>
+    <DefaultRolloverStrategy max="10"/>
+</RollingFile>
+    </Appenders>
+   
+    <Loggers>
+        <Logger name="logs.test" level="debug" additivity="false">
+        	<AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Logger name="org.springframework.boot" level="debug" additivity="false">
+        <AppenderRef ref="FileAppender"/>
+        	<AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="LogToConsole"/>
+        </Logger>
+        <Root level="debug">
+            <AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="LogToConsole"/>
+        </Root>
+    </Loggers>
+</Configuration>
